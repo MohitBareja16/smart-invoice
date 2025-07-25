@@ -151,12 +151,14 @@ export default function InvoiceForm() {
         },
         body: JSON.stringify(payload),
       });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Server error');
+      }
       
       const result = await response.json();
       
-      if (!response.ok) {
-        throw new Error(result.error || result.message || 'Failed to create invoice');
-      }
       
       if (result.success) {
         setSubmitStatus({

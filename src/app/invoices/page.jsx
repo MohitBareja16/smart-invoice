@@ -8,26 +8,34 @@ export default function InvoicesPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchInvoices = async () => {
-      try {
-        const response = await fetch('/api/invoices');
-        const result = await response.json();
-        
-        if (result.success) {
-          setInvoices(result.data);
-        } else {
-          setError(result.error || 'Failed to fetch invoices');
+  // Update fetchInvoices function
+    useEffect(() => {
+        const fetchInvoices = async () => {
+        try {
+            setLoading(true);
+            const response = await fetch('/api/invoices');
+            
+            // Check for HTTP errors
+            if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const result = await response.json();
+            
+            if (result.success) {
+            setInvoices(result.data || []);
+            } else {
+            throw new Error(result.error || 'Failed to load invoices');
+            }
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
         }
-      } catch (err) {
-        setError(err.message || 'An error occurred');
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    fetchInvoices();
-  }, []);
+        };
+        
+        fetchInvoices();
+    }, []);
 
   if (loading) {
     return (
