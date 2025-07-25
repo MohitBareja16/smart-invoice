@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    /* Improve table responsiveness */
+    .table-container {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Better input styling */
+    .input-field {
+      @apply w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition;
+    }
+    
+    /* Button styles */
+    .btn-primary {
+      @apply bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md font-medium transition;
+    }
+    
+    .btn-success {
+      @apply bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium transition;
+    }
+  }
