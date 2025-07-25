@@ -26,6 +26,11 @@ export default function RootLayout({ children }) {
                     View Invoices
                   </Link>
                 </li>
+                <li>
+                  <Link href="/invoices" className="text-blue-600 hover:text-blue-800">
+                    My Invoices
+                  </Link>
+                </li>
               </ul>
             </nav>
           </div>

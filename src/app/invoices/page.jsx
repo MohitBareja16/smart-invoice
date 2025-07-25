@@ -116,15 +116,15 @@ export default function InvoicesPage() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <Link 
-                      href={`/invoices/${invoice._id}`}
-                      className="text-blue-600 hover:text-blue-900 mr-4"
+                        href={`/invoices/${invoice._id}`}
+                        className="text-blue-600 hover:text-blue-900 mr-4"
                     >
-                      View
+                        View
                     </Link>
                     <button className="text-red-600 hover:text-red-900">
-                      Delete
+                        Delete
                     </button>
-                  </td>
+                    </td>
                 </tr>
               ))}
             </tbody>

@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import InvoicePDF from './InvoicePDF';
 
 export default function InvoiceForm() {
   // State for invoice data
@@ -473,6 +475,32 @@ export default function InvoiceForm() {
           )}
         </div>
       )}
+            {createdInvoice && (
+        <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <h3 className="text-lg font-medium text-blue-800 mb-3">
+            Invoice Created Successfully!
+            </h3>
+            <div className="flex flex-wrap gap-3">
+            <PDFDownloadLink 
+                document={<InvoicePDF invoice={createdInvoice} />}
+                fileName={`invoice_${createdInvoice.invoiceNumber}.pdf`}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-medium inline-flex items-center"
+            >
+                {({ blob, url, loading, error }) => (
+                loading ? 'Preparing PDF...' : 'Download Invoice PDF'
+                )}
+            </PDFDownloadLink>
+            
+            <Link 
+                href={`/invoices/${createdInvoice._id}`}
+                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded font-medium"
+            >
+                View Invoice Details
+            </Link>
+            </div>
+        </div>
+        )}
     </form>
+    
   );
 }
