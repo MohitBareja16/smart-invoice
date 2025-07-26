@@ -6,7 +6,8 @@ export async function GET(request, { params }) {
   await dbConnect();
   
   try {
-    const invoice = await Invoice.findById(params.id);
+    const { id } = await params;
+    const invoice = await Invoice.findById(id);
     
     if (!invoice) {
       return NextResponse.json(

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import '../styles/globals.css';
 
 export const metadata = {
   title: 'Smart Invoice Generator',
